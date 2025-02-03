@@ -38,6 +38,9 @@ public class Vetor_Aula02 {
                 case 3:
                     removerValor(input);
                     break;
+                case 4:
+                    lerConteudo(input);
+                    break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
@@ -118,6 +121,17 @@ public class Vetor_Aula02 {
 
         System.out.println("Vetor atualizado:");
         imprimirVetor();
+    }
+    public static void lerConteudo(Scanner input) {
+        System.out.println("Opção 4 selecionada: Ler o conteúdo de uma posição.");
+
+        System.out.print("Digite a posição (0 a " + (tamanho - 1) + "): ");
+        int posicao = input.nextInt();
+
+        if (!verificarPosicao(posicao, true)) {
+            return;
+        }
+        System.out.println("O valor na posição " + posicao + " é: " + vetor[posicao]);
     }
 
     public static void imprimirVetor() {
