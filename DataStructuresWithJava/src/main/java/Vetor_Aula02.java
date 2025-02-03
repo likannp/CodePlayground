@@ -41,6 +41,9 @@ public class Vetor_Aula02 {
                 case 4:
                     lerConteudo(input);
                     break;
+                case 5:
+                    localizarValor(input);
+                    break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
@@ -132,6 +135,25 @@ public class Vetor_Aula02 {
             return;
         }
         System.out.println("O valor na posição " + posicao + " é: " + vetor[posicao]);
+    }
+    public static void localizarValor(Scanner input) {
+        System.out.println("Opção 5 selecionada: Localizar um valor e retornar sua posição.");
+
+        System.out.print("Digite o valor a ser localizado: ");
+        int valor = input.nextInt();
+
+        boolean encontrado = false;
+        System.out.println("Posições onde o valor " + valor + " foi encontrado:");
+
+        for (int i = 0; i < vetor.length; i++) {
+            if (vetor[i] == valor) {
+                System.out.println("Posição " + i);
+                encontrado = true;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("O valor " + valor + " não foi encontrado no vetor.");
+        }
     }
 
     public static void imprimirVetor() {
