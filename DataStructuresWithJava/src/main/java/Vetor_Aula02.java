@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Vetor_Aula02 {
-    static int tamanho, minimo, maximo, vaga, repete, opcao;
-    static int[] vetor; // Vetor que armazenará os valores
+    static int tamanho, minimo, maximo, posicaoVaga = 0, repete;
+    static int[] vetor;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -31,8 +31,9 @@ public class Vetor_Aula02 {
             switch (opc) {
                 case 1:
                     atribuirValor(input);
+                    break;
                 case 2:
-                    System.out.println("Opção 2 selecionada: Alterar o valor de determinada posição.");
+                    alterarValor(input);
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
@@ -43,20 +44,31 @@ public class Vetor_Aula02 {
         input.close();
     }
 
+    // Método para verificar se a posição é válida e se está ocupada ou vaga
+    public static boolean verificarPosicao(int posicao, boolean deveEstarOcupada) {
+        if (posicao < 0 || posicao >= tamanho) {
+            System.out.println("ERRO: Posição inválida. A posição deve estar entre 0 e " + (tamanho - 1) + ".");
+            return false;
+        }
+        if (deveEstarOcupada && vetor[posicao] == posicaoVaga) {
+            System.out.println("ERRO: A posição " + posicao + " está vaga. Nada para alterar.");
+            return false;
+        } else if (!deveEstarOcupada && vetor[posicao] != posicaoVaga) {
+            System.out.println("ERRO: A posição " + posicao + " já está ocupada com o valor " + vetor[posicao] + ".");
+            return false;
+        }
+        return true;
+    }
+
+    // Método para atribuir um valor a uma posição específica do vetor
     public static void atribuirValor(Scanner input) {
         System.out.println("Opção 1 selecionada: Atribuir um valor a determinada posição.");
 
         System.out.print("Digite a posição (0 a " + (tamanho - 1) + "): ");
         int posicao = input.nextInt();
 
-        if (posicao < 0 || posicao >= tamanho) {
-            System.out.println("ERRO: Posição inválida. A posição deve estar entre 0 e " + (tamanho - 1) + ".");
-            return;
-        }
-
-        if (vetor[posicao] != 0) {
-            System.out.println("ERRO: A posição " + posicao + " já está ocupada com o valor " + vetor[posicao] + ".");
-            return;
+        if (!verificarPosicao(posicao, false)) {
+            return; // Sai do método se a posição não for válida ou já estiver ocupada
         }
 
         System.out.print("Digite o valor a ser atribuído: ");
@@ -64,6 +76,28 @@ public class Vetor_Aula02 {
 
         vetor[posicao] = valor;
         System.out.println("Valor " + valor + " atribuído à posição " + posicao + ".");
+
+        System.out.println("Vetor atualizado:");
+        imprimirVetor();
+    }
+
+    // Método para alterar o valor de uma posição específica do vetor
+    public static void alterarValor(Scanner input) {
+        System.out.println("Opção 2 selecionada: Alterar o valor de determinada posição.");
+
+        System.out.print("Digite a posição (0 a " + (tamanho - 1) + "): ");
+        int posicao = input.nextInt();
+
+        // Verifica se a posição é válida e está ocupada
+        if (!verificarPosicao(posicao, true)) {
+            return; // Sai do método se a posição não for válida ou estiver vaga
+        }
+
+        System.out.print("Digite o novo valor para a posição " + posicao + ": ");
+        int novoValor = input.nextInt();
+
+        vetor[posicao] = novoValor;
+        System.out.println("Valor da posição " + posicao + " alterado para " + novoValor + ".");
 
         System.out.println("Vetor atualizado:");
         imprimirVetor();
