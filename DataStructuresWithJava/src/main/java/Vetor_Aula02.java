@@ -35,6 +35,9 @@ public class Vetor_Aula02 {
                 case 2:
                     alterarValor(input);
                     break;
+                case 3:
+                    removerValor(input);
+                    break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
                     break;
@@ -44,7 +47,6 @@ public class Vetor_Aula02 {
         input.close();
     }
 
-    // Método para verificar se a posição é válida e se está ocupada ou vaga
     public static boolean verificarPosicao(int posicao, boolean deveEstarOcupada) {
         if (posicao < 0 || posicao >= tamanho) {
             System.out.println("ERRO: Posição inválida. A posição deve estar entre 0 e " + (tamanho - 1) + ".");
@@ -60,7 +62,6 @@ public class Vetor_Aula02 {
         return true;
     }
 
-    // Método para atribuir um valor a uma posição específica do vetor
     public static void atribuirValor(Scanner input) {
         System.out.println("Opção 1 selecionada: Atribuir um valor a determinada posição.");
 
@@ -81,7 +82,6 @@ public class Vetor_Aula02 {
         imprimirVetor();
     }
 
-    // Método para alterar o valor de uma posição específica do vetor
     public static void alterarValor(Scanner input) {
         System.out.println("Opção 2 selecionada: Alterar o valor de determinada posição.");
 
@@ -98,6 +98,23 @@ public class Vetor_Aula02 {
 
         vetor[posicao] = novoValor;
         System.out.println("Valor da posição " + posicao + " alterado para " + novoValor + ".");
+
+        System.out.println("Vetor atualizado:");
+        imprimirVetor();
+    }
+    public static void removerValor(Scanner input) {
+        System.out.println("Opção 3 selecionada: Remover o valor de determinada posição.");
+
+        System.out.print("Digite a posição (0 a " + (tamanho - 1) + "): ");
+        int posicao = input.nextInt();
+
+        if (!verificarPosicao(posicao, true)) {
+            return;
+        }
+
+        int valorRemovido = vetor[posicao];
+        vetor[posicao] = posicaoVaga;
+        System.out.println("Valor " + valorRemovido + " removido da posição " + posicao + ".");
 
         System.out.println("Vetor atualizado:");
         imprimirVetor();
