@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Vetor_Aula02 {
     static int tamanho, minimo, maximo, vaga, repete, opcao;
-    static int[] vetor;
+    static int[] vetor; // Vetor que armazenará os valores
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -14,6 +14,8 @@ public class Vetor_Aula02 {
                 System.out.println("ERRO: Vetor deve ter tamanho maior que zero.");
                 continue;
             }
+            vetor = new int[tamanho];
+
             System.out.println("Qual é o tamanho do mínimo:  ");
             minimo = input.nextInt();
             System.out.println("Qual é o tamanho do máximo? ");
@@ -25,10 +27,10 @@ public class Vetor_Aula02 {
                 System.out.println("Encerrando o programa...");
                 break;
             }
+
             switch (opc) {
                 case 1:
                     atribuirValor(input);
-                    break;
                 case 2:
                     System.out.println("Opção 2 selecionada: Alterar o valor de determinada posição.");
                     break;
@@ -40,6 +42,7 @@ public class Vetor_Aula02 {
 
         input.close();
     }
+
     public static void atribuirValor(Scanner input) {
         System.out.println("Opção 1 selecionada: Atribuir um valor a determinada posição.");
 
@@ -48,6 +51,11 @@ public class Vetor_Aula02 {
 
         if (posicao < 0 || posicao >= tamanho) {
             System.out.println("ERRO: Posição inválida. A posição deve estar entre 0 e " + (tamanho - 1) + ".");
+            return;
+        }
+
+        if (vetor[posicao] != 0) {
+            System.out.println("ERRO: A posição " + posicao + " já está ocupada com o valor " + vetor[posicao] + ".");
             return;
         }
 
