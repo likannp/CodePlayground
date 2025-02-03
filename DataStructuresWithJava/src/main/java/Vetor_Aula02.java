@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Vetor_Aula02 {
     static int tamanho, minimo, maximo, vaga, repete, opcao;
+    static int[] vetor;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -24,9 +25,46 @@ public class Vetor_Aula02 {
                 System.out.println("Encerrando o programa...");
                 break;
             }
+            switch (opc) {
+                case 1:
+                    atribuirValor(input);
+                    break;
+                case 2:
+                    System.out.println("Opção 2 selecionada: Alterar o valor de determinada posição.");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+                    break;
+            }
         }
 
         input.close();
+    }
+    public static void atribuirValor(Scanner input) {
+        System.out.println("Opção 1 selecionada: Atribuir um valor a determinada posição.");
+
+        System.out.print("Digite a posição (0 a " + (tamanho - 1) + "): ");
+        int posicao = input.nextInt();
+
+        if (posicao < 0 || posicao >= tamanho) {
+            System.out.println("ERRO: Posição inválida. A posição deve estar entre 0 e " + (tamanho - 1) + ".");
+            return;
+        }
+
+        System.out.print("Digite o valor a ser atribuído: ");
+        int valor = input.nextInt();
+
+        vetor[posicao] = valor;
+        System.out.println("Valor " + valor + " atribuído à posição " + posicao + ".");
+
+        System.out.println("Vetor atualizado:");
+        imprimirVetor();
+    }
+
+    public static void imprimirVetor() {
+        for (int i = 0; i < vetor.length; i++) {
+            System.out.println("Posição " + i + ": " + vetor[i]);
+        }
     }
 
     public static String msg() {
