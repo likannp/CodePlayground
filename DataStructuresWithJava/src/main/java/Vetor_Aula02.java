@@ -6,20 +6,20 @@ public class Vetor_Aula02 {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-
-        while (true) {
-            System.out.print("Tamanho do vetor:  ");
-            tamanho = input.nextInt();
-            if (tamanho <= 0) {
-                System.out.println("ERRO: Vetor deve ter tamanho maior que zero.");
-                continue;
-            }
+        System.out.print("Tamanho do vetor:  ");
+        tamanho = input.nextInt();
+        if (tamanho <= 0) {
+            System.out.println("ERRO: Vetor deve ter tamanho maior que zero.");
+        }else {
             vetor = new int[tamanho];
 
             System.out.println("Qual é o tamanho do mínimo:  ");
             minimo = input.nextInt();
             System.out.println("Qual é o tamanho do máximo? ");
             maximo = input.nextInt();
+        }
+
+        while (true) {
             System.out.println(msg());
             int opc = input.nextInt();
 
@@ -43,6 +43,12 @@ public class Vetor_Aula02 {
                     break;
                 case 5:
                     localizarValor(input);
+                    break;
+                case 7:
+                    removerUltimaOcupada(input);
+                    break;
+                case 8:
+                    imprimirVetor();
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
@@ -94,7 +100,6 @@ public class Vetor_Aula02 {
         System.out.print("Digite a posição (0 a " + (tamanho - 1) + "): ");
         int posicao = input.nextInt();
 
-        // Verifica se a posição é válida e está ocupada
         if (!verificarPosicao(posicao, true)) {
             return; // Sai do método se a posição não for válida ou estiver vaga
         }
@@ -108,6 +113,7 @@ public class Vetor_Aula02 {
         System.out.println("Vetor atualizado:");
         imprimirVetor();
     }
+
     public static void removerValor(Scanner input) {
         System.out.println("Opção 3 selecionada: Remover o valor de determinada posição.");
 
@@ -136,6 +142,7 @@ public class Vetor_Aula02 {
         }
         System.out.println("O valor na posição " + posicao + " é: " + vetor[posicao]);
     }
+
     public static void localizarValor(Scanner input) {
         System.out.println("Opção 5 selecionada: Localizar um valor e retornar sua posição.");
 
@@ -154,6 +161,24 @@ public class Vetor_Aula02 {
         if (!encontrado) {
             System.out.println("O valor " + valor + " não foi encontrado no vetor.");
         }
+    }
+
+    public static void removerUltimaOcupada(Scanner input) {
+        System.out.println("Opção 7 selecionada: Remover da última posição ocupada.");
+
+        // Percorre o vetor do final para o início
+        for (int i = vetor.length - 1; i >= 0; i--) {
+            if (vetor[i] != posicaoVaga) {
+                int valorRemovido = vetor[i];
+                vetor[i] = posicaoVaga;
+                System.out.println("Valor " + valorRemovido + " removido da posição " + i + ".");
+                System.out.println("Vetor atualizado:");
+                imprimirVetor();
+                return; // Sai do método após remover o valor
+            }
+        }
+
+        System.out.println("ERRO: Nenhuma posição ocupada encontrada para remover.");
     }
 
     public static void imprimirVetor() {
