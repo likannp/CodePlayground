@@ -11,6 +11,12 @@ public class Stack {
         this.tamanhoMaximo = tamanhoMaximo;
     }
 
+    public boolean full() {
+        return topo == tamanhoMaximo - 1;
+    }
+    public boolean empty() {
+        return topo == -1;
+    }
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.print("Tamanho da pilha: ");
