@@ -1,3 +1,5 @@
+package StackLab;
+
 import java.util.Scanner;
 
 public class Stack01 {
