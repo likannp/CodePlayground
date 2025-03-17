@@ -1,0 +1,4 @@
+Olá mundo
+Olá JavaScript
+JavaScript é incrível
+Olá programação
